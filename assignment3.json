@@ -1,0 +1,69 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {"url": "https://raw.githubusercontent.com/raoaaditya/raoaaditya.github.io/main/building_inventory.csv"},
+    "background": "whitesmoke",
+    "title": 
+    {
+      "text":"Square Footage of Agencies", 
+      "align":"center",
+      "fontSize": 30,
+      "subtitle": "Minimum Square Footage = 65000"    
+    },
+    "width": 800,
+    "height": 800,
+    "params": 
+    [
+      {
+        "name": "Highlight",
+        "select": {"type": "point", "on": "mouseover"}     
+      }
+    ],
+      "transform": 
+    [
+      {"filter": {"field": "Square Footage", "gte":65000}}
+    ],
+    "mark": 
+    {
+      "type": "circle", 
+      "tooltip": true,
+      "strokeOpacity": 0
+    },
+    "encoding": 
+    {
+      "y": 
+      {
+        "field": "Agency Name", 
+        "type": "nominal", 
+        "scale": {"zero": false}
+      },
+      "x": 
+      {
+        "field": "Square Footage", 
+        "type": "quantitative", 
+        "scale": {"zero": false}
+      },
+      "color": 
+      {
+        "condition": 
+        {
+          "param": "Highlight",
+          "field": "Bldg Status", 
+          "type": "nominal",
+          "scale":
+          {
+            "range":["#DC267F", "#FFB000", "#648FFF"]
+          }
+        },
+        "value": "grey"
+      },
+      "size": 
+      {
+        "condition":
+        {
+          "param": "Highlight",
+          "value": 400,
+          "legend": null
+        }
+      }
+    }
+  }
